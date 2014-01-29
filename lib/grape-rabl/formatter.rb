@@ -23,6 +23,14 @@ module Grape
           end
 
         end
+        
+        def skip_rabl?
+          !!@skip_rabl
+        end 
+        
+        def skip_rabl!
+          @skip_rabl = true
+        end 
 
         private
 
@@ -35,7 +43,7 @@ module Grape
           end
 
           def rablable?
-            !! endpoint.options[:route_options][:rabl]
+            !skipped_rabl? && !!endpoint.options[:route_options][:rabl]
           end
 
           def rabl
